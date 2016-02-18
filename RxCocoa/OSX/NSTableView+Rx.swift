@@ -49,13 +49,13 @@ extension NSTableView {
     /**
      Bindable sink for selectedRowIndexes property.
      */
-    public func rx_selectedRowIndexes() -> AnyObserver<NSIndexSet?> {
+    public func rx_selectedRowIndexes() -> AnyObserver<NSIndexSet> {
         return AnyObserver { [weak self] event in
             MainScheduler.ensureExecutingOnScheduler()
             
             switch event {
             case .Next(let value):
-                self?.selectedRowIndexes(value, byExtendingSelection: false)
+                self?.selectRowIndexes(value, byExtendingSelection: false)
             case .Error(let error):
                 bindingErrorToInterface(error)
                 break
